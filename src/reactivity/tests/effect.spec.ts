@@ -18,4 +18,22 @@ describe('effect', () => {
     user.age++
     expect(nextAge).toBe(12)
   })
+  it('should return runner when call effect', () => {
+    // 调用effect后 会返回一个function(被称为runner).
+    // 当调用runner的的时候，会再次执行传递给effect的fn;fn调用的时候，会把fn的返回值return出去
+
+    // 总结： 当调用 runner 的时候可以重新执行 effect.run
+    //        runner 的返回值就是用户给的 fn 的返回值
+
+    let foo = 10
+    const runner = effect(() => {
+      foo++
+      return 'foo'
+    })
+
+    expect(foo).toBe(11)
+    const r = runner()
+    expect(foo).toBe(12)
+    expect(r).toBe('foo')
+  })
 })
