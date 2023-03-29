@@ -1,15 +1,20 @@
 class ReactiveEffect {
   private _fn: any
-  constructor(fn) {
+  scheduler: Function | undefined
+  constructor(fn, scheduler) {
     this._fn = fn
+    this.scheduler = scheduler
   }
   run() {
     activeEffect = this
     return this._fn()
   }
 }
-export function effect(fn) {
-  const _effect = new ReactiveEffect(fn)
+type Option = {
+  scheduler?: Function
+}
+export function effect(fn, option: Option = {}) {
+  const _effect = new ReactiveEffect(fn, option.scheduler)
   _effect.run()
   return _effect.run.bind(_effect)
 }
@@ -36,6 +41,10 @@ export function trigger(target, key) {
   let depsMap = targetMap.get(target)
   let deps = depsMap.get(key)
   for (const effect of deps) {
-    effect.run()
+    if (effect.scheduler) {
+      effect.scheduler()
+    } else {
+      effect.run()
+    }
   }
 }
