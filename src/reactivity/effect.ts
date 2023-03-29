@@ -2,6 +2,7 @@ class ReactiveEffect {
   private _fn: any
   scheduler: Function | undefined
   deps = []
+  active = true
   constructor(fn, scheduler) {
     this._fn = fn
     this.scheduler = scheduler
@@ -11,10 +12,16 @@ class ReactiveEffect {
     return this._fn()
   }
   stop() {
-    this.deps.forEach((dep: any) => {
-      dep.delete(this)
-    })
+    if (this.active) {
+      cleanupEffect(this)
+      this.active = false
+    }
   }
+}
+function cleanupEffect(effect) {
+  effect.deps.forEach((dep: any) => {
+    dep.delete(effect)
+  })
 }
 type effectOptions = {
   scheduler?: Function
