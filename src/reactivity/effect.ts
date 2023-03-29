@@ -3,6 +3,7 @@ class ReactiveEffect {
   scheduler: Function | undefined
   deps = []
   active = true
+  onStop: Function | undefined
   constructor(fn, scheduler) {
     this._fn = fn
     this.scheduler = scheduler
@@ -14,6 +15,9 @@ class ReactiveEffect {
   stop() {
     if (this.active) {
       cleanupEffect(this)
+      if (this.onStop) {
+        this.onStop()
+      }
       this.active = false
     }
   }
@@ -25,9 +29,11 @@ function cleanupEffect(effect) {
 }
 type effectOptions = {
   scheduler?: Function
+  onStop?: Function
 }
 export function effect(fn, option: effectOptions = {}) {
   const _effect = new ReactiveEffect(fn, option.scheduler)
+  _effect.onStop = option.onStop
   _effect.run()
   let runner: any = _effect.run.bind(_effect)
   runner.effect = _effect
