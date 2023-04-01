@@ -1,17 +1,13 @@
-import { createGetter, createSetter } from './baseHandler'
+import { mutableHandlers, readonlyHandlers } from './baseHandler'
 
-export function reactive(row) {
-  return new Proxy(row, {
-    get: createGetter(),
-    set: createSetter(),
-  })
+export function reactive(raw) {
+  return createReactiveObject(raw, mutableHandlers)
 }
 
-export function readonly(row) {
-  return new Proxy(row, {
-    get: createGetter(true),
-    set(target, key, value, receiver) {
-      return true
-    },
-  })
+export function readonly(raw) {
+  return createReactiveObject(raw, readonlyHandlers)
+}
+
+function createReactiveObject(target, baseHandles) {
+  return new Proxy(target, baseHandles)
 }

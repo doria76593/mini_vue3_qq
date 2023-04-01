@@ -16,3 +16,20 @@ export function createSetter() {
     return res
   }
 }
+const get = createGetter()
+const set = createSetter()
+const readonlyGet = createGetter(true)
+
+export const mutableHandlers = {
+  get,
+  set,
+}
+
+export const readonlyHandlers = {
+  get: readonlyGet,
+  set(target, key) {
+    console.warn(`key :"${String(key)}" set 失败，因为 target 是 readonly 类型`, target)
+
+    return true
+  },
+}
