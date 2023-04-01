@@ -1,4 +1,4 @@
-import { mutableHandlers, readonlyHandlers } from './baseHandler'
+import { mutableHandlers, readonlyHandlers, shallowReadonlyHandlers } from './baseHandler'
 
 export const enum ReactiveFlags {
   // 常量枚举使用const关键字定义，它与普通枚举不同的时，它会在编译阶段删除该对象，且不能访问该枚举对象，只能访问该枚举对象成员
@@ -12,6 +12,10 @@ export function reactive(raw) {
 
 export function readonly(raw) {
   return createReactiveObject(raw, readonlyHandlers)
+}
+
+export function shallowReadonly(raw) {
+  return createReactiveObject(raw, shallowReadonlyHandlers)
 }
 
 function createReactiveObject(target, baseHandles) {
