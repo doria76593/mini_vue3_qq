@@ -1,3 +1,4 @@
+import { hasChanged } from '../shared'
 import { isTracking, trackEffects, triggerEffects } from './effect'
 
 class RefImpl {
@@ -15,8 +16,10 @@ class RefImpl {
   }
   set value(newValue) {
     // 一定是先去修改value的值 再去促发依赖
-    this._value = newValue
-    triggerEffects(this.dep)
+    if (hasChanged(newValue, this._value)) {
+      this._value = newValue
+      triggerEffects(this.dep)
+    }
   }
 }
 
