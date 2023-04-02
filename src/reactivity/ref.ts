@@ -12,9 +12,7 @@ class RefImpl {
     this.dep = new Set()
   }
   get value() {
-    if (isTracking()) {
-      trackEffects(this.dep)
-    }
+    trackRefValue(this)
     return this._value
   }
   set value(newValue) {
@@ -24,6 +22,11 @@ class RefImpl {
       this._value = convert(newValue)
       triggerEffects(this.dep)
     }
+  }
+}
+function trackRefValue(ref) {
+  if (isTracking()) {
+    trackEffects(ref.dep)
   }
 }
 function convert(value) {
