@@ -1,17 +1,35 @@
-import { track, trigger } from "./effect";
+import { mutableHandlers, readonlyHandlers, shallowReadonlyHandlers } from './baseHandler'
 
-export function reactive(row) {
-  return new Proxy(row, {
-    get: function (target, key, receiver) {
-      //   console.log(target, key, receiver)
-      let res = Reflect.get(target, key)
-      track(target, key);
-      return res
-    },
-    set(target, key, value, receiver) {
-      const res = Reflect.set(target, key, value)
-      trigger(target, key);
-      return res
-    },
-  })
+export const enum ReactiveFlags {
+  // 常量枚举使用const关键字定义，它与普通枚举不同的时，它会在编译阶段删除该对象，且不能访问该枚举对象，只能访问该枚举对象成员
+  IS_REACTIVE = '__v_isReactive',
+  IS_READONLY = '__v_isReadonly',
+}
+
+export function reactive(raw) {
+  return createReactiveObject(raw, mutableHandlers)
+}
+
+export function readonly(raw) {
+  return createReactiveObject(raw, readonlyHandlers)
+}
+
+export function shallowReadonly(raw) {
+  return createReactiveObject(raw, shallowReadonlyHandlers)
+}
+
+function createReactiveObject(target, baseHandles) {
+  return new Proxy(target, baseHandles)
+}
+
+export function isReactive(value) {
+  return !!value[ReactiveFlags.IS_REACTIVE]
+}
+
+export function isReadonly(value) {
+  return !!value[ReactiveFlags.IS_READONLY]
+}
+
+export function isProxy(value) {
+  return isReactive(value) || isReadonly(value)
 }

@@ -1,4 +1,4 @@
-import { effect } from '../effect'
+import { effect, stop } from '../effect'
 import { reactive } from '../reactive'
 
 describe('effect', () => {
@@ -36,7 +36,10 @@ describe('effect', () => {
     expect(foo).toBe(12)
     expect(r).toBe('foo')
   })
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1fbdd87b879b7b7fe47d48fedad1771c466ba16d
   it('scheduler', () => {
     let dummy
     let run: any
@@ -55,6 +58,7 @@ describe('effect', () => {
     // should be called on first trigger
     obj.foo++
     expect(scheduler).toHaveBeenCalledTimes(1)
+<<<<<<< HEAD
     // should not run yet
     expect(dummy).toBe(1)
     // manually run
@@ -62,4 +66,50 @@ describe('effect', () => {
     // should have run
     expect(dummy).toBe(2)
   })
+=======
+    // // should not run yet
+    expect(dummy).toBe(1)
+    // // manually run
+    run()
+    // // should have run
+    expect(dummy).toBe(2)
+  })
+
+  it('stop', () => {
+    let dummy
+    const obj = reactive({ prop: 1 })
+    const runner = effect(() => {
+      dummy = obj.prop
+    })
+    obj.prop = 2
+    expect(dummy).toBe(2)
+    stop(runner)
+    // obj.prop = 3
+    obj.prop++
+    expect(dummy).toBe(2)
+
+    // stopped effect should still be manually callable
+    runner()
+    expect(dummy).toBe(3)
+  })
+
+  it('onStop', () => {
+    const obj = reactive({
+      foo: 1,
+    })
+    const onStop = jest.fn()
+    let dummy
+    const runner = effect(
+      () => {
+        dummy = obj.foo
+      },
+      {
+        onStop,
+      }
+    )
+
+    stop(runner)
+    expect(onStop).toBeCalledTimes(1)
+  })
+>>>>>>> 1fbdd87b879b7b7fe47d48fedad1771c466ba16d
 })

@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "build": "rollup --config",
-    "test": "jest"
+    "test": "jest",
+    "testc": "jest --watch"
   },
   "license": "MIT",
   "devDependencies": {
