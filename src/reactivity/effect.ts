@@ -1,4 +1,4 @@
-import { _extend } from '../shared'
+import { _extend } from '../shared/index'
 
 let activeEffect
 let shouldTrack = false
