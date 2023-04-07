@@ -5,7 +5,12 @@ export const App = {
   render() {
     // ui
     // return h('div', 'hi, ' + this.msg)
-    return h('div', 'hi, mini-vue')
+    return h(
+      'div',
+      { id: 'myapp', class: 'red' },
+      // 'hi, mini-vue'
+      [h('p', { class: 'red' }, 'hi'), h('p', { class: 'blue' }, 'mini-vue')]
+    )
   },
 
   setup() {
