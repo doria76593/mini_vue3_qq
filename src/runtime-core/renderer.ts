@@ -61,7 +61,8 @@ function mountComponent(vnode: any, container) {
 function setupRenderEffect(instance: any, container) {
   //   console.log('instance')
   //   console.log(instance)
-  const subTree = instance.render()
+  const { proxy } = instance
+  const subTree = instance.render.call(proxy)
   console.log('instance22')
   console.log(subTree)
   console.log(container)
