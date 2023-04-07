@@ -5,7 +5,7 @@
   "module": "lib/guide-mini-vue.esm.js",
   "type": "module",
   "scripts": {
-    "build": "rollup --config",
+    "build": "rollup --config --watch",
     "test": "jest",
     "testc": "jest --watch"
   },

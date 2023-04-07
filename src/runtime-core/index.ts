@@ -1,1 +1,5 @@
-export const a = 100
+export * from './component'
+export * from './createApp'
+export * from './vnode'
+export * from './h'
+export * from './renderer'
