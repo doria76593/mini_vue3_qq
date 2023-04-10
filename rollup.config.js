@@ -29,5 +29,6 @@ export default {
       file: pkg.module,
     },
   ],
+  sourceMap: true,
   plugins: [typescript()],
 }

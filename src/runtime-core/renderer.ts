@@ -51,14 +51,14 @@ function processComponent(vnode: any, container: any) {
   mountComponent(vnode, container)
 }
 
-function mountComponent(vnode: any, container) {
-  const instance = createComponentInstance(vnode)
+function mountComponent(initialVNode: any, container) {
+  const instance = createComponentInstance(initialVNode)
 
   setupComponent(instance)
-  setupRenderEffect(instance, vnode, container)
+  setupRenderEffect(instance, initialVNode, container)
 }
 
-function setupRenderEffect(instance: any, vnode, container) {
+function setupRenderEffect(instance: any, initialVNode, container) {
   //   console.log('instance')
   //   console.log(instance)
   const { proxy } = instance
@@ -67,5 +67,5 @@ function setupRenderEffect(instance: any, vnode, container) {
   console.log(subTree)
   console.log(container)
   patch(subTree, container)
-  vnode.el = subTree.el
+  initialVNode.el = subTree.el
 }
