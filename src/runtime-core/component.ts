@@ -22,11 +22,14 @@ function setupStatefulComponent(instance: any) {
     {},
     {
       get(target, key) {
-        console.log('key')
+        console.log('key111')
         console.log(key)
         const { setupState } = instance
         if (key in setupState) {
           return setupState[key]
+        }
+        if (key === '$el') {
+          return instance.vnode.el
         }
       },
     }
