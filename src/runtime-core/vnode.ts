@@ -1,3 +1,5 @@
+import { ShapeFlags } from '../shared/ShapeFlags'
+
 export function createVNode(type, props?, children?) {
   // console.log('createVNode')
   // console.log(type, props, children)
@@ -6,7 +8,19 @@ export function createVNode(type, props?, children?) {
     props,
     children,
     el: null,
+    shapeFlag: getShapeFlag(type),
+  }
+
+  // 按位或（|）有1个为1 则为1
+  if (typeof children === 'string') {
+    vnode.shapeFlag |= ShapeFlags.TEXT_CHILDREN
+  } else if (Array.isArray(children)) {
+    vnode.shapeFlag |= ShapeFlags.ARRAY_CHILDREN
   }
 
   return vnode
+}
+
+function getShapeFlag(type) {
+  return typeof type === 'string' ? ShapeFlags.ELEMENT : ShapeFlags.STATEFUL_COMPONENT
 }
