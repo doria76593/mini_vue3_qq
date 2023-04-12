@@ -76,9 +76,9 @@ function setupRenderEffect(instance: any, initialVNode, container) {
   //   console.log(instance)
   const { proxy } = instance
   const subTree = instance.render.call(proxy)
-  console.log('instance22')
-  console.log(subTree)
-  console.log(container)
+  // console.log('instance22')
+  // console.log(subTree)
+  // console.log(container)
   patch(subTree, container)
   initialVNode.el = subTree.el
 }

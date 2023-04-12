@@ -1,13 +1,16 @@
-import { h, renderSlots } from '../../lib/guide-mini-vue.esm.js'
+import { h } from '../../lib/guide-mini-vue.esm.js'
 
 export const Foo = {
+  nane: 'foo',
   setup() {
     return {}
   },
   render() {
-    const foo = h('p', {}, 'foo')
+    const foo = h('p', {}, 'foo33')
+    console.log('$slots', this.$slots)
+    return h('div', {}, [foo, this.$slots])
+    // return h('div', {}, 'foo223')
 
-    return h('div', {}, [foo])
     // Foo .vnode. children
     // console.log(this.$slots)
     // children -> vnode
