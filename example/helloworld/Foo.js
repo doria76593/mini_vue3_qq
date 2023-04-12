@@ -1,4 +1,4 @@
-import { h } from '../../lib/guide-mini-vue.esm.js'
+import { h, renderSlots } from '../../lib/guide-mini-vue.esm.js'
 
 export const Foo = {
   nane: 'foo',
@@ -8,7 +8,10 @@ export const Foo = {
   render() {
     const foo = h('p', {}, 'foo33')
     console.log('$slots', this.$slots)
-    return h('div', {}, [foo, this.$slots])
+    // 1-单个插槽
+    // return h('div', {}, [foo, this.$slots])
+    // 2-插槽是一个数组
+    return h('div', {}, [foo, renderSlots(this.$slots)])
     // return h('div', {}, 'foo223')
 
     // Foo .vnode. children

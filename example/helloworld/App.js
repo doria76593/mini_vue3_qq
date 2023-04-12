@@ -5,7 +5,11 @@ export const App = {
   name: 'App',
   render() {
     const app = h('div', {}, 'App')
-    const foo = h(Foo, {}, h('p', {}, '123'))
+    // 1-基本的渲染插槽
+    // const foo = h(Foo, {}, h('p', {}, '123'))
+
+    // 2-渲染一个数组
+    const foo = h(Foo, {}, [h('p', {}, '123'), h('p', {}, '456')])
 
     // object key
     // const foo = h(
