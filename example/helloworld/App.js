@@ -9,7 +9,7 @@ export const App = {
       h('div', {}, 'App'),
       h(Foo, {
         onAdd(a, b) {
-          console.log('onAdd')
+          console.log('onAdd 222')
           // console.log('onAdd', a, b)
         },
         // onAddFoo() {

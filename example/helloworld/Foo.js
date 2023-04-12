@@ -1,6 +1,7 @@
 import { h } from '../../lib/guide-mini-vue.esm.js'
 
 export const Foo = {
+  name: 'F00',
   setup(props, { emit }) {
     const emitAdd = () => {
       console.log('emit1 add')
