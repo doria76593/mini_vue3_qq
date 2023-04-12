@@ -4,19 +4,20 @@ import { Foo } from './Foo.js'
 export const App = {
   name: 'App',
   render() {
-    // emit
-    return h('div', {}, [
-      h('div', {}, 'App'),
-      h(Foo, {
-        onAdd(a, b) {
-          console.log('onAdd 222')
-          // console.log('onAdd', a, b)
-        },
-        // onAddFoo() {
-        //   console.log('onAddFoo')
-        // },
-      }),
-    ])
+    const app = h('div', {}, 'App')
+    const foo = h(Foo, {}, h('p', {}, 123))
+    // object key
+    // const foo = h(
+    //   Foo,
+    //   {},
+    //   {
+    //     header: ({ age }) => h('p', {}, 'header' + age),
+    //     footer: () => h('p', {}, 'footer'),
+    //   }
+    // )
+    // 数组 vnode
+    // const foo = h(Foo, {}, h("p", {}, "123"));
+    return h('div', {}, [app, foo])
   },
 
   setup() {
