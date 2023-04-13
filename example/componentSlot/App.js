@@ -13,16 +13,26 @@ export const App = {
 
     // 3-命名插槽
     // object key
+    // const foo = h(
+    //   Foo,
+    //   {},
+    //   {
+    //     header: h('p', {}, 'header'),
+    //     footer: h('p', {}, 'footer'),
+    //   }
+    // )
+    // return h('div', {}, [app, foo])
+
+    // 4-作用域插槽
+
     const foo = h(
       Foo,
       {},
       {
-        header: h('p', {}, 'header'),
-        footer: h('p', {}, 'footer'),
+        header: ({ age }) => h('p', {}, 'header' + age),
+        footer: () => h('p', {}, 'footer'),
       }
     )
-    // 数组 vnode
-    // const foo = h(Foo, {}, h("p", {}, "123"));
     return h('div', {}, [app, foo])
   },
 
