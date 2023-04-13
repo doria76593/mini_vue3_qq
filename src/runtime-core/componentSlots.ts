@@ -1,3 +1,5 @@
+import { ShapeFlags } from '../shared/ShapeFlags'
+
 export function initSlots(instance, children) {
   // console.log(instance, children)
 
@@ -10,7 +12,10 @@ export function initSlots(instance, children) {
   // console.log(slots)
   // instance.slots = slots
 
-  normalizeObjectSlots(children, instance.slots)
+  const { vnode } = instance
+  if (vnode.shapeFlag & ShapeFlags.SLOT_CHILDREN) {
+    normalizeObjectSlots(children, instance.slots)
+  }
 }
 
 function normalizeObjectSlots(children: any, slots: any) {
