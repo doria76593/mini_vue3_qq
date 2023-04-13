@@ -9,17 +9,18 @@ export const App = {
     // const foo = h(Foo, {}, h('p', {}, '123'))
 
     // 2-渲染一个数组
-    const foo = h(Foo, {}, [h('p', {}, '123'), h('p', {}, '456')])
+    // const foo = h(Foo, {}, [h('p', {}, '123'), h('p', {}, '456')])
 
+    // 3-命名插槽
     // object key
-    // const foo = h(
-    //   Foo,
-    //   {},
-    //   {
-    //     header: ({ age }) => h('p', {}, 'header' + age),
-    //     footer: () => h('p', {}, 'footer'),
-    //   }
-    // )
+    const foo = h(
+      Foo,
+      {},
+      {
+        header: h('p', {}, 'header'),
+        footer: h('p', {}, 'footer'),
+      }
+    )
     // 数组 vnode
     // const foo = h(Foo, {}, h("p", {}, "123"));
     return h('div', {}, [app, foo])
