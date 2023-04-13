@@ -1,31 +1,43 @@
 import { h } from '../../lib/guide-mini-vue.esm.js'
+
 import { Foo } from './Foo.js'
 
+window.self = null
 export const App = {
+  // 必须要写 render
   name: 'App',
   render() {
-    const app = h('div', {}, 'App')
-    // 1-基本的渲染插槽
-    // const foo = h(Foo, {}, h('p', {}, '123'))
-
-    // 2-渲染一个数组
-    const foo = h(Foo, {}, [h('p', {}, '123'), h('p', {}, '456')])
-
-    // object key
-    // const foo = h(
-    //   Foo,
-    //   {},
-    //   {
-    //     header: ({ age }) => h('p', {}, 'header' + age),
-    //     footer: () => h('p', {}, 'footer'),
-    //   }
-    // )
-    // 数组 vnode
-    // const foo = h(Foo, {}, h("p", {}, "123"));
-    return h('div', {}, [app, foo])
+    window.self = this
+    // ui
+    return h(
+      'div',
+      {
+        id: 'root',
+        class: ['red', 'hard'],
+        onClick() {
+          console.log('click')
+        },
+        onMousedown() {
+          console.log('mousedown')
+        },
+      },
+      [
+        h('div', {}, 'hi,' + this.msg),
+        h(Foo, {
+          count: 1,
+        }),
+      ]
+      // "hi, " + this.msg
+      // string
+      // "hi, mini-vue"
+      // Array
+      // [h("p", { class:"red"}, "hi"), h("p", {class:"blue"}, "mini-vue")]
+    )
   },
 
   setup() {
-    return {}
+    return {
+      msg: 'mini-vue-haha',
+    }
   },
 }

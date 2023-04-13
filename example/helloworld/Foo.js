@@ -1,35 +1,17 @@
-import { h, renderSlots } from '../../lib/guide-mini-vue.esm.js'
+import { h } from '../../lib/guide-mini-vue.esm.js'
 
 export const Foo = {
-  nane: 'foo',
-  setup() {
-    return {}
+  setup(props) {
+    // props.count
+    console.log('props1')
+    console.log(props)
+
+    // 3.
+    // shallow readonly
+    props.count++
+    console.log(props)
   },
   render() {
-    const foo = h('p', {}, 'foo33')
-    console.log('$slots', this.$slots)
-    // 1-单个插槽
-    // return h('div', {}, [foo, this.$slots])
-    // 2-插槽是一个数组
-    return h('div', {}, [foo, renderSlots(this.$slots)])
-    // return h('div', {}, 'foo223')
-
-    // Foo .vnode. children
-    // console.log(this.$slots)
-    // children -> vnode
-    //
-    // renderSlots
-    // 具名插槽
-    // 1. 获取到要渲染的元素 1
-    // 2. 要获取到渲染的位置
-    // 作用域插槽
-    // const age = 18
-    // return h('div', {}, [
-    //   renderSlots(this.$slots, 'header', {
-    //     age,
-    //   }),
-    //   foo,
-    //   renderSlots(this.$slots, 'footer'),
-    // ])
+    return h('div', {}, 'foo: ' + this.count)
   },
 }
