@@ -86,7 +86,34 @@ export function createRenderer(options) {
       if (prevShapeFlag & ShapeFlags.TEXT_CHILDREN) {
         hostSetElementText(container, '')
         mountChildren(c2, container, parentComponent)
+      } else {
+        // 新节点是array+旧节点也是array:双端对比diff算法
+        patchKeyedChildren(c1, c2, container, parentComponent)
       }
+    }
+  }
+  function patchKeyedChildren(c1, c2, container, parentComponent) {
+    // 双端对比：i从0开始对比，相同就+1,直到找到不同的。 e1/e2是从尾部向前查找
+    let i = 0
+    let e1 = c1.length - 1
+    let e2 = c2.length - 1
+
+    function isSomeVNodeType(n1, n2) {
+      return n1.type === n2.type && n1.key === n2.key
+    }
+
+    // 左侧对比
+    while (i <= e1 && i <= e2) {
+      //i的边界条件
+      const n1 = c1[i]
+      const n2 = c2[i]
+      if (isSomeVNodeType(n1, n2)) {
+        patch(n1, n2, container, parentComponent)
+      } else {
+        break
+      }
+      i++
+      console.log('iiii', i)
     }
   }
 
