@@ -128,9 +128,14 @@ export function createRenderer(options) {
       e1--
       e2--
     }
-  }
 
-  // 右侧对比
+    // 新的比老的长 需要创建
+    if (i > e1) {
+      if (i <= e2) {
+        patch(null, c2[i], container, parentComponent)
+      }
+    }
+  }
 
   function unmountChildren(children) {
     for (let i = 0; i < children.length; i++) {

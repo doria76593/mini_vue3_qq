@@ -12,8 +12,8 @@ import { ref, h } from '../../lib/guide-mini-vue.esm.js'
 // 2. 右侧的对比
 // a (b c)
 // d e (b c)
-const prevChildren = [h('p', { key: 'A' }, 'A'), h('p', { key: 'B' }, 'B'), h('p', { key: 'C' }, 'C')]
-const nextChildren = [h('p', { key: 'D' }, 'D'), h('p', { key: 'E' }, 'E'), h('p', { key: 'B' }, 'B'), h('p', { key: 'C' }, 'C')]
+// const prevChildren = [h('p', { key: 'A' }, 'A'), h('p', { key: 'B' }, 'B'), h('p', { key: 'C' }, 'C')]
+// const nextChildren = [h('p', { key: 'D' }, 'D'), h('p', { key: 'E' }, 'E'), h('p', { key: 'B' }, 'B'), h('p', { key: 'C' }, 'C')]
 
 // 3. 新的比老的长
 //     创建新的
@@ -21,24 +21,15 @@ const nextChildren = [h('p', { key: 'D' }, 'D'), h('p', { key: 'E' }, 'E'), h('p
 // (a b)
 // (a b) c
 // i = 2, e1 = 1, e2 = 2
-// const prevChildren = [h("p", { key: "A" }, "A"), h("p", { key: "B" }, "B")];
-// const nextChildren = [
-//   h("p", { key: "A" }, "A"),
-//   h("p", { key: "B" }, "B"),
-//   h("p", { key: "C" }, "C"),
-//   h("p", { key: "D" }, "D"),
-// ];
+// const prevChildren = [h('p', { key: 'A' }, 'A'), h('p', { key: 'B' }, 'B')]
+// const nextChildren = [h('p', { key: 'A' }, 'A'), h('p', { key: 'B' }, 'B'), h('p', { key: 'C' }, 'C'), h('p', { key: 'D' }, 'D')]
 
 // 右侧
 // (a b)
 // c (a b)
 // i = 0, e1 = -1, e2 = 0
-// const prevChildren = [h("p", { key: "A" }, "A"), h("p", { key: "B" }, "B")];
-// const nextChildren = [
-//   h("p", { key: "C" }, "C"),
-//   h("p", { key: "A" }, "A"),
-//   h("p", { key: "B" }, "B"),
-// ];
+const prevChildren = [h('p', { key: 'A' }, 'A'), h('p', { key: 'B' }, 'B')]
+const nextChildren = [h('p', { key: 'C' }, 'C'), h('p', { key: 'A' }, 'A'), h('p', { key: 'B' }, 'B')]
 
 // 4. 老的比新的长
 //     删除老的
