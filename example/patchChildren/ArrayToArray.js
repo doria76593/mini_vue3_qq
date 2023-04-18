@@ -37,12 +37,8 @@ const nextChildren = [h('p', { key: 'C' }, 'C'), h('p', { key: 'A' }, 'A'), h('p
 // (a b) c
 // (a b)
 // i = 2, e1 = 2, e2 = 1
-// const prevChildren = [
-//   h("p", { key: "A" }, "A"),
-//   h("p", { key: "B" }, "B"),
-//   h("p", { key: "C" }, "C"),
-// ];
-// const nextChildren = [h("p", { key: "A" }, "A"), h("p", { key: "B" }, "B")];
+// const prevChildren = [h('p', { key: 'A' }, 'A'), h('p', { key: 'B' }, 'B'), h('p', { key: 'C' }, 'C')]
+// const nextChildren = [h('p', { key: 'A' }, 'A'), h('p', { key: 'B' }, 'B')]
 
 // 右侧
 // a (b c)
